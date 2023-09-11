@@ -3,6 +3,7 @@
 output "container_id" {
   description = "ID of the Docker container"
   value       = docker_container.nginx.id
+  sensitive = true
 }
 # produces an output value named "image_id"
 # this is the docker image identifier
