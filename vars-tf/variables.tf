@@ -3,6 +3,11 @@ variable "container_name" {
   # basic types include string, number and bool
   type        = string
   default     = "ExampleNginxContainer"
+
+  validation {
+     condition     = length(var.container_name) > 8 && substr(var.container_name, 0, 7) == "Example"
+     error_message = "The container_name must begin with Example"
+  } 
 }
 
 variable "internal_port" {
