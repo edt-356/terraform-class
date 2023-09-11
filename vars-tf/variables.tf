@@ -14,7 +14,7 @@ variable "internal_port" {
 variable "external_port" {
   description = "external port"
   type = number
-  #default = 2224
-  default = 8000
+  default = 2224
+  #default = 8000
 }
 
