@@ -9,7 +9,7 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "simplegoservice " {
+resource "docker_image" "simplegoservice" {
   name         = "registry.gitlab.com/alta3/simplegoservice"
   keep_locally = true       // keep image after "destroy"
 }
