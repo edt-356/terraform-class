@@ -4,3 +4,16 @@ variable "container_name" {
   type        = string
   default     = "ExampleNginxContainer"
 }
+
+variable "internal_port" {
+  description = "internal port"
+  type=number
+  default=80
+}
+
+variable "external_port" {
+  description = "external port"
+  type = number
+  default = 2224
+}
+
