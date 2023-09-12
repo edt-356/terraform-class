@@ -7,3 +7,10 @@ variable "container_name_from_root" {
     type = string
     default = "defaultContainerNamefromRootModule"   # override this if you want to change the name used by the child module
 }
+
+# used in "my_modules/container_maker/main.tf" and may be remapped in the root "main.tf"
+variable "external_port" {
+  description = "External port on the container"
+  type        = number
+  default     = 2222
+}
