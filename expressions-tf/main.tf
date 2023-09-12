@@ -23,7 +23,7 @@ resource "random_pet" "nginx" {
 resource "docker_container" "nginx" {
   count = 4
   image = docker_image.nginx.image_id
-  name  = "nginx-${random_pet.nginx.id}-${count.index}"
+  name  = "nginx-${random_pet.nginx[count.index].id}-${count.index}"
   # name = "nginx-hoppy-frog-0"
 
   ports {
