@@ -17,7 +17,18 @@ resource "docker_image" "simplegoservice" {
 }
 
 
-resource "docker_container" "simplegoservice" {
+#   resource "docker_container" "simplegoservice" {
+#     image = docker_image.simplegoservice.image_id
+#     name = "simple_service"
+#     ports {
+#       internal = 9876
+#       external = 5432
+#     }
+#   }
+
+
+## this resource is now named docker_container.batman_api
+resource "docker_container" "batman_api" {
   image = docker_image.simplegoservice.image_id
   name = "simple_service"
   ports {
