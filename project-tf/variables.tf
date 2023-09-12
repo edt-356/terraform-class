@@ -12,5 +12,5 @@ variable "container_name_from_root" {
 variable "external_port_from_root" {
   description = "External port on the container"
   type        = number
-  default     = 2222
+  default     = 8000
 }
