@@ -1,5 +1,6 @@
 /* main.tf
-   Alta3 Research - rzfeeser@alta3.com */
+   Alta3 Research - rzfeeser@alta3.com
+   Updated to include an error condition */
 
 # interact with docker
 provider "docker" {}
@@ -18,7 +19,6 @@ resource "docker_image" "nginx" {
 # available from random.random_pet
 resource "random_pet" "nginx" {
   length = 2
-  #loop_id = var.loop_id
 }
 
 resource "docker_container" "nginx" {
@@ -26,11 +26,33 @@ resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "nginx-${random_pet.nginx.id}-${count.index}"
   # name = "nginx-hoppy-frog-0"
-  #loop = random_pet.nginx.loop_id
 
   ports {
     internal = 80
     # 8000, 8001, 8002, 8003
     external = 8000 + count.index
+  }
+}
+
+resource "docker_image" "redis" {
+  name         = "redis:7.0.11"
+  keep_locally = true
+}
+
+resource "time_sleep" "wait_120_seconds" {
+  depends_on = [docker_image.redis]
+
+  create_duration = "120s"
+}
+
+resource "docker_container" "data" {
+  # wait 120 seconds after downloading the image and launching the container
+  depends_on = [time_sleep.wait_120_seconds]
+  image      = docker_image.redis.image_id
+  name       = "data"
+
+  ports {
+    internal = 6379
+    external = 6379
   }
 }
