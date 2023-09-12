@@ -18,7 +18,6 @@ resource "docker_image" "nginx" {
 # available from random.random_pet
 resource "random_pet" "nginx" {
   length = 2
-  loop_id = var.loop_id
 }
 
 resource "docker_container" "nginx" {
@@ -26,7 +25,6 @@ resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
   name  = "nginx-${random_pet.nginx.id}-${count.index}"
   # name = "nginx-hoppy-frog-0"
-  loop = random_pet.nginx.loop_id
 
   ports {
     internal = 80
