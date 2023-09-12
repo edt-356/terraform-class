@@ -18,7 +18,7 @@ resource "docker_image" "nginx" {
 # available from random.random_pet
 resource "random_pet" "nginx" {
   length = 2
-  #container_id=docker_container.nginx.id
+  container_id = var.docker_container.nginx.id
 }
 
 resource "docker_container" "nginx" {
