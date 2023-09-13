@@ -5,7 +5,7 @@
 terraform {
   required_providers {
     null = {
-      source = "hashicorp/null"
+      source  = "hashicorp/null"
       version = "3.1.1"
     }
   }
@@ -18,18 +18,24 @@ provider "null" {
 
 /* a list of local variables */
 locals {
-  avengers = ["the wasp", "ant man", "ironman", "captain america", "thor", "doctor strange", "spider man", "hulk", "black panther", "black widow"]
+  #avengers = ["the wasp", "ant man", "ironman", "captain america", "thor", "doctor strange", "spider man", "hulk", "black panther", "black widow"]
+  avengers = {"ironman"= "hero"
+              "captain america"= "hero"
+              "thanos"= "villain"
+              "venom"= "anti-hero"
+             }
 }
 
 
 /* The null_resource implements the standard resource lifecycle but takes no more action */
 resource "null_resource" "avengers" {
-  for_each = toset(local.avengers)
+  for_each = local.avengers             // local is not a typo, locals.avengers would be incorrect
   /* triggers allows specifying a random set of values that when
      changed will cause the resource to be replaced */
   triggers = {
-    name = each.value  // a special variable, "each" created by terraform
+    name = each.key  // a special variable, "each" created by terraform
                        // the object has "each.key" and "each.value"
+    status= each.value
   }
 }
 
