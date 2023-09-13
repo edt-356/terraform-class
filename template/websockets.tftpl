@@ -1,0 +1,5 @@
+%{ for dev, ip in ip_addrs ~}
+Device ${dev} - ${ip}:${port}
+%{ endfor ~}
+
+#templatefile("./websockets.tftpl", { port = 8080, ip_addrs = ["10.0.0.1", "10.0.0.2"] })
