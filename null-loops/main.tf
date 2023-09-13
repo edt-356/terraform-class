@@ -16,7 +16,7 @@ provider "null" {
   # Configuration options
 }
 
-/* a list of local variables */
+/* a list of local variables 2*/
 locals {
   #avengers = ["the wasp", "ant man", "ironman", "captain america", "thor", "doctor strange", "spider man", "hulk", "black panther", "black widow"]
   avengers = {"ironman"= "hero"
