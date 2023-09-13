@@ -32,3 +32,8 @@ resource "null_resource" "avengers" {
                        // the object has "each.key" and "each.value"
   }
 }
+
+/* We want these outputs */
+output "avengers" {
+  value = null_resource.avengers
+}
